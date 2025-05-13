@@ -1,0 +1,30 @@
+---
+import Container from "@components/Container.astro";
+import Typography from "@components/Typography.astro";
+
+---
+
+<footer class="relative w-full bg-gradient-to-t from-neutral-950 via-neutral-900 to-neutral-900">
+  {/* Gradient line */}
+  <div class="relative flex items-center justify-center w-full h-[1.5px] nav-gradient blur-none">
+    <div class="w-full inline-flex h-[12px] bg-teal-200/50 blur-2xl bg-blend-screen text-neutral-">
+    </div>
+  </div>
+  {/* Footer */}
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between w-full h-full px-8 md:px-16 py-20">
+    {/* Logo and socials */}
+    <div class="flex flex-col flex-1 items-center w-full md:w-fit h-full gap-8">
+      <a>Texto</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  :root {
+    --teal-white: #f0fdfa;
+  }
+  .nav-gradient {
+    background: linear-gradient(to right, transparent 0%, var(--teal-white) 35%, var(--teal-white) 65%, transparent 100%);
+  }
+</style>
+

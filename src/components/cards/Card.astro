@@ -1,0 +1,69 @@
+---
+import Typography from "@components/Typography.astro";
+
+import Action from "@components/Action.astro";
+import type { ActionProps } from "@/types.d.ts";
+import type { HTMLTag } from "astro/types";
+
+interface Props {
+	title?: string;
+	description?: string;
+	className?: string;
+	href?: string;
+	image?: string;
+	imageClass?: string;
+	contentClass?: string;
+	alt?: string;
+	actions?: ActionProps<HTMLTag>[];
+	descriptions?: (typeof Typography)[];
+}
+
+const {
+	title,
+	description,
+	className,
+	href = "#",
+	image,
+  imageClass,
+  contentClass,
+	alt = "Imagen de portada",
+	actions,
+	descriptions,
+} = Astro.props;
+---
+
+<div
+	class:list={[
+		`border rounded-lg shadow bg-gradient-to-br from-neutral-700 to-neutral-800 border-neutral-700 hover:border-neutral-500 p-5 ${className}`,
+	]}
+>
+	{image && <img class:list={[`${imageClass}`]} src={image} alt={alt} />}
+  <div class:list={[`${contentClass}`]}>
+		{
+			title && (
+				<a href={href}>
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
+						{title}
+					</h5>
+				</a>
+			)
+		}
+		{
+			descriptions &&
+				descriptions.map((description) => <Typography {...description} />)
+		}
+		{
+			description && (
+				<Typography
+					as="p"
+					variant="p"
+					color="custom"
+					class:list={["text-neutral-400"]}
+				>
+					{description}
+				</Typography>
+			)
+		}
+		{actions && actions.map((action) => <Action {...action} />)}
+  </div>
+</div>

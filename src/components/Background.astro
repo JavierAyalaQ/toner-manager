@@ -1,0 +1,38 @@
+---
+---
+{/* Bg ibelick
+<div class="min-h-screen min-w-screen absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+*/}
+
+<div class="min-h-screen min-w-screen fixed inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
+  <div class="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-teal-600 opacity-20 blur-[100px] bg-animation"></div>
+</div>
+
+<style>
+  .bg-animation {
+    animation: bgAnimation 10s linear infinite;
+  }
+    @keyframes bgAnimation {
+      0% {
+        opacity: 0.2;
+      }
+      50% {
+        opacity: 0.15;
+        width: 400px;
+        height: 400px;
+      }
+      75% {
+      }
+      100% {
+        opacity: 0.2;
+        width: 310px;
+        height: 310px;
+      }
+    }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bg-animation {
+      animation: none;
+    }
+  }
+</style>

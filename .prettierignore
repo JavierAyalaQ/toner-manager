@@ -1,0 +1,6 @@
+node_modules/
+dist/
+build/
+
+src/components/Typography.astro
+src/components/Action.astro
