@@ -7,11 +7,6 @@ export const onRequest = defineMiddleware(({ cookies, redirect, url }, next) => 
 
   const isProtectedRoute = protectedRoutes.some((route) => url.pathname.startsWith(route));
 
-  const isLogInRoute = url.pathname === "/login";
-
-  if (isLogInRoute) {
-    return redirect(isLoggedIn ? "/" : "/login");
-  }
   if (isProtectedRoute && !isLoggedIn) {
     return redirect("/login");
   }
