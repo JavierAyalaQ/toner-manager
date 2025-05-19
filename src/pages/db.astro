@@ -1,0 +1,16 @@
+---
+import Container from "@components/Container.astro";
+import Layout from '@/layouts/Layout.astro';
+import { sql } from '@/lib/neon';
+
+const response =  await  sql`SELECT NOW() as current_time`;
+const currentTime = response[0].current_time;
+---
+
+
+<Layout title="Database Test" description="Test page for database connection">
+  <Container>
+    <h1>Tiempo actual</h1>
+    <p>El tiempo es: {currentTime}</p>
+  </Container>
+</Layout>
