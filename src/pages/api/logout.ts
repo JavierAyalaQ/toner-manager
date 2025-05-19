@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 
-export const POST: APIRoute = async ({ redirect, cookies }) => {
+export const GET: APIRoute = async ({ redirect, cookies }) => {
   cookies.delete("auth", { path: "/" });
-  return redirect("/");
+  return redirect("/login");
 };
