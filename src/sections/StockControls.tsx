@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useStockStore } from "@/store/stockStore"
+import type { Stock } from "@/store/stockStore";
 
 export default function StockControls() {
     const stock = useStockStore((state) => state.stock);
     const updateStock = useStockStore((state) => state.updateStock);
     
-    const [selectedToner, setSelectedToner] = useState<keyof typeof stock>("EPSON");
+    const [selectedToner, setSelectedToner] = useState<number>(1);
     const [amount, setAmount] = useState<number>(0);
 
     const [changeLog, setChangeLog] = useState<string[]>([]);

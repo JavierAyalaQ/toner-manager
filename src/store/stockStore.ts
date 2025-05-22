@@ -9,7 +9,7 @@ export type Stock = {
 
 export interface StockStore {
   stock: Stock[];
-  updateStock: (item: string, quantity: number) => void;
+  updateStock: (id: number, quantity: number) => void;
 }
 
 export const useStockStore = create<StockStore>()(
@@ -21,8 +21,8 @@ export const useStockStore = create<StockStore>()(
         { id: 3, name: "EPSON", quantity: 0 },
         { id: 4, name: "CANON2", quantity: 0 },
       ],
-      updateStock: (item, quantity) => set((state) => ({
-        stock: { ...state.stock, [item]: quantity },
+      updateStock: (id, quantity) => set((state) => ({
+        stock: { ...state.stock, [id]: { ...state.stock[id], quantity } },
       })),
     }),
     {

@@ -3,13 +3,10 @@ import { useState, useEffect } from "react";
 import { useStockStore } from "@/store/stockStore";
 
 export default function GeneralPanel() {
-    const [toner, setToner] = useState(0);
-    const [tonerLow, setTonerLow] = useState(0);
-    const [lastRestock, setLastRestock] = useState("N/A");
-
-    const stock = useStockStore((state) => state.stock);
-    const totalStock = Object.values(stock).reduce((acc, value) => acc + value, 0);
-    const lowStock = Object.values(stock).filter((value) => value < 5).length;
+  const stock = useStockStore((state) => state.stock);
+  const totalStock = Object.values(stock.map((item) => item.quantity)).reduce((a, b) => a + b, 0);
+  const lowStock = Object.values(stock.map((item) => item.quantity)).filter((value) => value < 5).length;
+  const [lastRestock, setLastRestock] = useState("N/A");
     
     useEffect(() => {
         const savedLogs = localStorage.getItem("changeLog");
@@ -22,7 +19,6 @@ export default function GeneralPanel() {
             if (match) {
                 const date = match[1];
                 const formattedDate = date.replace(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2})/, '$1-$2-$3 $4:$5:$6');
-                //date.replace(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2})/, '$1/$2/$3');
                 setLastRestock(formattedDate);
             }
         }
