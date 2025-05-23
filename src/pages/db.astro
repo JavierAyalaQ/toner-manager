@@ -5,7 +5,7 @@ import { db } from '@/lib/neon';
 
 import Data from '@/sections/Data.tsx';
 
-const response =  await  db`SELECT NOW() as current_time`;
+const response =  await db`SELECT NOW() as current_time`;
 const currentTime = response[0].current_time;
 ---
 
