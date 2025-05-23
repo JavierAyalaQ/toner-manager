@@ -1,9 +1,11 @@
 ---
 import Container from "@components/Container.astro";
 import Layout from '@/layouts/Layout.astro';
-import { sql } from '@/lib/neon';
+import { db } from '@/lib/neon';
 
-const response =  await  sql`SELECT NOW() as current_time`;
+import Data from '@/sections/Data.tsx';
+
+const response =  await  db`SELECT NOW() as current_time`;
 const currentTime = response[0].current_time;
 ---
 
@@ -12,5 +14,6 @@ const currentTime = response[0].current_time;
   <Container>
     <h1>Tiempo actual</h1>
     <p>El tiempo es: {currentTime}</p>
+    <Data client:load />
   </Container>
 </Layout>

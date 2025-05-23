@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useStockStore } from "@/store/stockStore"
-import type { Stock } from "@/store/stockStore";
+import type { StockItem } from "@/store/stockStore";
 
 export default function StockControls() {
     const stock = useStockStore((state) => state.stock);

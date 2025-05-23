@@ -1,14 +1,18 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type Stock = {
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000");
+
+export type StockItem = {
   id: number;
   name: string;
   quantity: number;
 }
 
 export interface StockStore {
-  stock: Stock[];
+  stock: StockItem[];
   updateStock: (id: number, quantity: number) => void;
 }
 
@@ -30,6 +34,3 @@ export const useStockStore = create<StockStore>()(
     }
   )
 );
-
-
-//pending
