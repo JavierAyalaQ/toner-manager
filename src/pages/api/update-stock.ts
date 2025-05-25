@@ -3,9 +3,9 @@ import { db } from "@/lib/neon"
 
 export const POST: APIRoute = async ({ request }) => {
   const body = await request.json();
-  const { id, stock } = body;
+  const { id, quantity } = body;
 
-  if (!id || !stock) {
+  if (!id || !quantity) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
@@ -13,7 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
-    await db`UPDATE toner_stock SET toner_amount = ${stock} WHERE toner_id = ${id}`;
+    await db`UPDATE toner_stock SET toner_amount = ${quantity} WHERE toner_id = ${id}`;
     return new Response(JSON.stringify({ success: "Stock updated successfully" }), {
       status: 200,
       headers: { "Content-Type": "application/json" },

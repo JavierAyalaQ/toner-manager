@@ -28,11 +28,18 @@ export const useStockStore = create<StockStore>((set, get) => {
       set({ stock: mapped });
     },
     updateStock: (id, quantity) => {
-      const stock = get().stock;
-      const updatedStock = stock.map(item =>
-        item.id === id ? { ...item, quantity } : item
-      );
-      set({ stock: updatedStock });
+      fetch("/api/update-stock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, quantity }),
+          })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.error("Error updating stock:", err);
+      })
     },
   };
 });
