@@ -1,0 +1,44 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "@/styles/global.css";
+import SEO from "@components/common/SEO.astro";
+import Imports from "@components/common/Imports.astro";
+import Navbar from "@sections/Navbar.astro";
+import Footer from "@sections/Footer.astro";
+import Background from "@components/Background.astro";
+
+
+interface Props {
+	title: string;
+	description?: string;
+}
+const { title, description = "" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<SEO title={title} description={description} />
+		<Imports />
+		<ClientRouter fallback="swap" />
+	</head>
+	<body class="bg-neutral-900 text-neutral-50 font-medium">
+    <Background />
+		<Navbar />
+		<main class="my-32">
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		font-family: "Onest Variable", sans-serif;
+		color-scheme: dark;
+		scroll-behavior: smooth;
+		scrollbar-width: thin;
+	}
+  	a {
+		text-decoration: none;
+	}
+</style>
