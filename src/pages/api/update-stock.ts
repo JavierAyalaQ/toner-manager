@@ -3,7 +3,7 @@ import { db } from "@/lib/neon"
 
 export const POST: APIRoute = async ({ request }) => {
   const body = await request.json();
-  const { id, name, stock } = body;
+  const { id, stock } = body;
 
   if (!id || !stock) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), {

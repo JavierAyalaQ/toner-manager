@@ -3,12 +3,13 @@ import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import Typography from "@components/Typography.astro";
 
-import StockControls from "@/sections/StockControls";
+import StockControls from "@sections/StockControls";
+import Manager from "@sections/Manager.tsx";
 ---
 
 <Layout title="Gestión de inventario">
 	<Container className="">
     <Typography as="h1" variant="h1" class:list="text-4xl font-bold mb-12">Inventario</Typography>
-    <StockControls client:load />
+    <Manager client:load />
   </Container>
 </Layout>
