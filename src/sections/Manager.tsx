@@ -47,6 +47,14 @@ export default function StockControls() {
 
   function handleRemoveStock(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    const stockItem = stock.find((item) => item.id === selectedTonerId);
+    const newStock = (stockItem ? stockItem.quantity : 0) - amount;
+    updateStock(selectedTonerId, newStock);
+
+    const selectedTonerName = stock.find((item) => item.id === selectedTonerId)?.name;
+    const log = `Se ha quitado ${amount} a ${selectedTonerName}. Inventario actual: ${newStock}`;
+
+    handleSetLog(log, selectedTonerId);
   }
 
 
@@ -57,7 +65,7 @@ export default function StockControls() {
 
   useEffect(() => {
     const input = document.getElementById("stock") as HTMLInputElement | null;
-    if (input && input.value === "0") {
+    if (input) {
       input.addEventListener("focus", clearInputOnFocus);
       return () => {
         input.removeEventListener("focus", clearInputOnFocus);
@@ -91,6 +99,7 @@ export default function StockControls() {
             max="100"
             onChange={(e) => {setAmount(parseInt(e.target.value))}}
             value={amount}
+            defaultValue={0}
             required
           />
           <div className="flex items-center gap-4">
@@ -108,19 +117,19 @@ export default function StockControls() {
         <div className="col-span-2 row-span-2 row-start-3 col-start-1 w-full h-full p-4 bg-gray-700/50 border border-gray-700 hover:border-gray-100 rounded">
           <h2 className="text-2xl font-bold mb-2">Overview</h2>
           <div className="grid grid-cols-2 gap-4">
-            {/* {Object.entries(stock).map(([item, quantity]) => (
-              <div key={item} className="flex flex-col items-center justify-center bg-gray-600 p-4 rounded text-gray-700 border border-gray-700 hover:border-gray-100">
+            {Object.entries(stock).map(([_, item]) => (
+              <div key={item.id} className="flex flex-col items-center justify-center bg-gray-600 p-4 rounded text-gray-700 border border-gray-700 hover:border-gray-100">
                 <span className="text-xl font-medium text-gray-100">
-                  {item}
+                  {item.name}
                 </span>
                 <span className="text-md text-gray-100">
                   Cantidad:&nbsp;
                   <strong>
-                    {quantity}
+                    {item.quantity}
                   </strong>
                 </span>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
         <div className="col-span-1 row-span-4 col-start-3 row-start-1 justify-self-start w-full h-full bg-gray-700/50 border border-gray-700 hover:border-gray-100 p-4 rounded">
