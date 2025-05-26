@@ -3,7 +3,12 @@ import { useState, useEffect } from "react";
 import { useStockStore } from "@/store/stockStore";
 
 export default function GeneralPanel() {
-  const stock = useStockStore((state) => state.stock);
+  const { stock, fetchStock } = useStockStore();
+
+  useEffect(() => {
+    fetchStock();
+  }, [fetchStock]);
+  
   const totalStock = Object.values(stock.map((item) => item.quantity)).reduce((a, b) => a + b, 0);
   const lowStock = Object.values(stock.map((item) => item.quantity)).filter((value) => value < 5).length;
   const [lastRestock, setLastRestock] = useState("N/A");

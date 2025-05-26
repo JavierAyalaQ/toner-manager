@@ -14,7 +14,6 @@ export default function StockControls() {
   const [amount, setAmount] = useState<number>(0);
 
 
-
   const updateStock = useStockStore((state) => state.updateStock);
   
 
@@ -35,6 +34,7 @@ export default function StockControls() {
 
   function handleAddStock(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    
     const stockItem = stock.find((item) => item.id === selectedTonerId);
     const newStock = (stockItem ? stockItem.quantity : 0) + amount || 0;
     updateStock(selectedTonerId, newStock);
@@ -47,6 +47,7 @@ export default function StockControls() {
 
   function handleRemoveStock(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+
     const stockItem = stock.find((item) => item.id === selectedTonerId);
     const newStock = (stockItem ? stockItem.quantity : 0) - amount;
     updateStock(selectedTonerId, newStock);
