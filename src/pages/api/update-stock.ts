@@ -5,7 +5,7 @@ export const POST: APIRoute = async ({ request }) => {
   const body = await request.json();
   const { id, quantity } = body;
 
-  if (!id || !quantity) {
+  if (!id || quantity === undefined) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },

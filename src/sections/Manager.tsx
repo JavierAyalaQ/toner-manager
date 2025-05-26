@@ -36,13 +36,13 @@ export default function StockControls() {
   function handleAddStock(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     const stockItem = stock.find((item) => item.id === selectedTonerId);
-    const newStock = (stockItem ? stockItem.quantity : 0) + amount;
+    const newStock = (stockItem ? stockItem.quantity : 0) + amount || 0;
     updateStock(selectedTonerId, newStock);
 
     const selectedTonerName = stock.find((item) => item.id === selectedTonerId)?.name;
     const log = `Se ha añadido ${amount} a ${selectedTonerName}. Inventario actual: ${newStock}`;
 
-    handleSetLog(log, selectedTonerId);
+    /* handleSetLog(log, selectedTonerId); */
   }
 
   function handleRemoveStock(e: React.MouseEvent<HTMLButtonElement>) {
@@ -54,7 +54,7 @@ export default function StockControls() {
     const selectedTonerName = stock.find((item) => item.id === selectedTonerId)?.name;
     const log = `Se ha quitado ${amount} a ${selectedTonerName}. Inventario actual: ${newStock}`;
 
-    handleSetLog(log, selectedTonerId);
+    /* handleSetLog(log, selectedTonerId); */
   }
 
 
@@ -97,9 +97,8 @@ export default function StockControls() {
             placeholder="Cantidad"
             min="0"
             max="100"
-            onChange={(e) => {setAmount(parseInt(e.target.value))}}
+            onChange={(e) => setAmount(parseInt(e.target.value))}
             value={amount}
-            defaultValue={0}
             required
           />
           <div className="flex items-center gap-4">

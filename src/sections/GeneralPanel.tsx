@@ -7,22 +7,24 @@ export default function GeneralPanel() {
   const totalStock = Object.values(stock.map((item) => item.quantity)).reduce((a, b) => a + b, 0);
   const lowStock = Object.values(stock.map((item) => item.quantity)).filter((value) => value < 5).length;
   const [lastRestock, setLastRestock] = useState("N/A");
-    
-    useEffect(() => {
-        const savedLogs = localStorage.getItem("changeLog");
-        if (savedLogs) {
-            const entries = savedLogs.split('\n');
 
-            const mostRecentEntry = entries[entries.length - 1];
+  /* 
+  useEffect(() => {
+      const savedLogs = localStorage.getItem("changeLog");
+      if (savedLogs) {
+          const entries = savedLogs.split('\n');
 
-            const match = mostRecentEntry.match(/\(([^)]+)\)/);
-            if (match) {
-                const date = match[1];
-                const formattedDate = date.replace(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2})/, '$1-$2-$3 $4:$5:$6');
-                setLastRestock(formattedDate);
-            }
-        }
-    }, []);
+          const mostRecentEntry = entries[entries.length - 1];
+
+          const match = mostRecentEntry.match(/\(([^)]+)\)/);
+          if (match) {
+              const date = match[1];
+              const formattedDate = date.replace(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2}):(\d{2})/, '$1-$2-$3 $4:$5:$6');
+              setLastRestock(formattedDate);
+          }
+      }
+  }, []); 
+  */
 
     return (
         <div className="w-full grid grid-cols-3 gap-4">
