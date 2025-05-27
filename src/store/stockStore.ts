@@ -9,7 +9,7 @@ export type StockItem = {
 export interface StockStore {
   stock: StockItem[];
   fetchStock: () => Promise<void>;
-  updateStock: (id: number, quantity: number) => void;
+  updateStock: (id: number, quantity: number, log: string) => Promise<void>;
 }
 
 export const useStockStore = create<StockStore>((set, get) => {
@@ -27,12 +27,12 @@ export const useStockStore = create<StockStore>((set, get) => {
 
       set({ stock: mapped });
     },
-    updateStock: async (id: number, quantity: number) => {
+    updateStock: async (id: number, quantity: number, log: string) => {
       try {
       const res = await fetch("/api/update-stock", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id, quantity }),
+        body: JSON.stringify({ id, quantity, log }),
       });
       const data = await res.json();
       console.log(data);

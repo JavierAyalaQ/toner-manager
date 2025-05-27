@@ -34,45 +34,26 @@ export default function StockControls() {
 
   function handleAddStock(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-    
     const stockItem = stock.find((item) => item.id === selectedTonerId);
     const newStock = (stockItem ? stockItem.quantity : 0) + amount || 0;
-    updateStock(selectedTonerId, newStock);
-
     const selectedTonerName = stock.find((item) => item.id === selectedTonerId)?.name;
     const log = `Se ha añadido ${amount} a ${selectedTonerName}. Inventario actual: ${newStock}`;
+    updateStock(selectedTonerId, newStock, log);
 
     /* handleSetLog(log, selectedTonerId); */
   }
 
   function handleRemoveStock(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
-
     const stockItem = stock.find((item) => item.id === selectedTonerId);
     const newStock = (stockItem ? stockItem.quantity : 0) - amount;
-    updateStock(selectedTonerId, newStock);
-
     const selectedTonerName = stock.find((item) => item.id === selectedTonerId)?.name;
     const log = `Se ha quitado ${amount} a ${selectedTonerName}. Inventario actual: ${newStock}`;
+    updateStock(selectedTonerId, newStock, log);
 
     /* handleSetLog(log, selectedTonerId); */
   }
 
-
-  // Clear input on focus
-  function clearInputOnFocus(this: HTMLInputElement) {
-    this.value = "";
-  }
-
-  useEffect(() => {
-    const input = document.getElementById("stock") as HTMLInputElement | null;
-    if (input) {
-      input.addEventListener("focus", clearInputOnFocus);
-      return () => {
-        input.removeEventListener("focus", clearInputOnFocus);
-      };
-    }
-  }, []);
 
 
   return (
