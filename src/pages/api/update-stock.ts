@@ -14,7 +14,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   try {
     await db`UPDATE toner_stock SET toner_amount = ${quantity} WHERE toner_id = ${id}`;
-    await db`INSERT INTO toner_logs (toner_log_id, toner_log_message, toner_log_time, toner_id) VALUES (DEFAULT, ${log}, NOW(), ${id})`;
+    await db`INSERT INTO toner_logs (toner_log_id, toner_log_message, toner_log_time, toner_id) VALUES (DEFAULT, ${log}, DEFAULT, ${id})`;
     return new Response(JSON.stringify({ success: "Stock updated successfully" }), {
       status: 200,
       headers: { "Content-Type": "application/json" },

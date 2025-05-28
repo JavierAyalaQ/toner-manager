@@ -1,16 +1,42 @@
-import React from "react";
+import React, { use } from "react";
 import { useState, useEffect } from "react";
 import { useStockStore } from "@/store/stockStore"
 import type { StockItem } from "@/store/stockStore";
 
+export type Log = {
+  modified_id: number;
+  id: number;
+  message: string;
+  timestamp: string;
+}
+  
 export default function StockControls() {
   const { stock, fetchStock } = useStockStore();
+  const [ logs, setLogs ] = useState<Log[]>([]);
+  
   const [isLoading, setIsLoading] = useState(false);
-
-
+  
   useEffect(() => {
     fetchStock();
   }, [fetchStock]);
+
+  const fetchLogs = async () => {
+    const res = await fetch("/api/get-logs");
+    const data = await res.json();
+
+    const mapped = data.map((item: any): Log => ({
+      modified_id: item.toner_id,
+      id: item.toner_log_id,
+      message: item.toner_log_message,
+      timestamp: item.toner_log_timestamp,
+    }));
+    setLogs(mapped);
+  };
+
+  useEffect(() => { 
+    fetchLogs();
+  }, [fetchStock]);
+
 
   const [selectedTonerId, setSelectedTonerId] = useState<number>(1);
   const [amount, setAmount] = useState<number>(0);
@@ -42,8 +68,6 @@ export default function StockControls() {
     const selectedTonerName = stock.find((item) => item.id === selectedTonerId)?.name;
     const log = `Se ha añadido ${amount} a ${selectedTonerName}. Inventario actual: ${newStock}`;
     updateStock(selectedTonerId, newStock, log);
-
-    /* handleSetLog(log, selectedTonerId); */
   }
 
   function handleRemoveStock(e: React.MouseEvent<HTMLButtonElement>) {
@@ -53,8 +77,6 @@ export default function StockControls() {
     const selectedTonerName = stock.find((item) => item.id === selectedTonerId)?.name;
     const log = `Se ha quitado ${amount} a ${selectedTonerName}. Inventario actual: ${newStock}`;
     updateStock(selectedTonerId, newStock, log);
-
-    /* handleSetLog(log, selectedTonerId); */
   }
 
 
@@ -119,11 +141,12 @@ export default function StockControls() {
         <div className="col-span-1 row-span-4 col-start-3 row-start-1 justify-self-start w-full h-full bg-gray-700/50 border border-gray-700 hover:border-gray-100 p-4 rounded">
           <h2 className="text-2xl font-bold mb-2">Historial de cambios</h2>
           <ul className="text-base text-gray-100 flex flex-col gap-2 mt-4">
-            {/* {changeLog.slice(0, 4).map((log, index) => (
-              <li key={index} className="bg-gray-700 p-4 rounded mb-2 border border-gray-700 hover:border-gray-100">
-                {log}
+            {logs.slice(0, 4).map((log) => (
+              <li key={log.id} className="bg-gray-700 p-4 rounded mb-2 border border-gray-700 hover:border-gray-100">
+                <p>{log.message}</p><br/>
+                <p>{log.timestamp}</p>
               </li>
-            ))} */}
+            ))}
           </ul>
         </div>
     </div>
