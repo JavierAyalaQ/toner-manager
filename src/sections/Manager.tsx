@@ -5,6 +5,8 @@ import type { StockItem } from "@/store/stockStore";
 
 export default function StockControls() {
   const { stock, fetchStock } = useStockStore();
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     fetchStock();
@@ -34,6 +36,7 @@ export default function StockControls() {
 
   function handleAddStock(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setIsLoading(true);
     const stockItem = stock.find((item) => item.id === selectedTonerId);
     const newStock = (stockItem ? stockItem.quantity : 0) + amount || 0;
     const selectedTonerName = stock.find((item) => item.id === selectedTonerId)?.name;
