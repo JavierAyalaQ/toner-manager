@@ -1,4 +1,7 @@
 import { create } from "zustand";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000");
 
 export type StockItem = {
   id: number;

@@ -8,7 +8,7 @@ io.on("connection", (socket) => {
   console.log("A user connected");
 
   socket.on("update-stock", (item) => {
-    socket.broadcast.emit("stock-update", item);
+    socket.broadcast.emit("stock-updated", item);
   });
 
   socket.on("disconnect", () => {
