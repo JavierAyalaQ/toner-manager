@@ -2,13 +2,8 @@ import React, { use } from "react";
 import { useState, useEffect } from "react";
 import { useStockStore } from "@/store/stockStore"
 import type { StockItem } from "@/store/stockStore";
+import type { Log } from "@/types";
 
-export type Log = {
-  modified_id: number;
-  id: number;
-  message: string;
-  timestamp: string;
-}
   
 export default function StockControls() {
   const { stock, fetchStock } = useStockStore();
