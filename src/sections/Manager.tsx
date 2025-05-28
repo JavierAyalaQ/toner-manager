@@ -105,11 +105,11 @@ export default function StockControls() {
           />
           <div className="flex items-center gap-4">
             <button onClick={(e) => {handleAddStock(e)}} 
-              className="mt-2 bg-blue-800 hover:bg-blue-900 text-white p-2 rounded py-2 px-4 text-sm font-bold cursor-pointer">
+              className="mt-2 bg-blue-800 hover:bg-blue-900 transition-colors text-white p-2 rounded py-2 px-4 text-sm font-bold cursor-pointer">
               Agregar al inventario
             </button>
             <button onClick={(e) => {handleRemoveStock(e)}} 
-              className="mt-2 bg-red-800 hover:bg-red-900 text-white p-2 rounded py-2 px-4 text-sm font-bold cursor-pointer">
+              className="mt-2 bg-red-800 hover:bg-red-900 transition-colors text-white p-2 rounded py-2 px-4 text-sm font-bold cursor-pointer">
               Quitar del inventario
             </button>
           </div>
@@ -120,10 +120,10 @@ export default function StockControls() {
           <div className="grid grid-cols-2 gap-4">
             {Object.entries(stock).map(([_, item]) => (
               <div key={item.id} className="flex flex-col items-center justify-center bg-gray-600 p-4 rounded text-gray-700 border border-gray-700 hover:border-gray-100">
-                <span className="text-xl font-medium text-gray-100">
+                <span className="text-base md:text-xl font-medium text-gray-100">
                   {item.name}
                 </span>
-                <span className="text-md text-gray-100">
+                <span className="text-sm md:text-md text-gray-100">
                   Cantidad:&nbsp;
                   <strong>
                     {item.quantity}
@@ -134,12 +134,14 @@ export default function StockControls() {
           </div>
         </div>
         <div className="col-span-1 row-span-4 col-start-3 row-start-1 justify-self-start w-full h-full bg-gray-700/50 border border-gray-700 hover:border-gray-100 p-4 rounded">
-          <h2 className="text-2xl font-bold mb-2">Historial de cambios</h2>
+          <a href="/logs" className="hover:text-teal-500 transition-colors">
+            <h2 className="text-2xl font-bold mb-2">Historial de cambios</h2>
+          </a>
           <ul className="text-base text-gray-100 flex flex-col gap-2 mt-4">
             {logs.slice(0, 4).map((log) => (
-              <li key={log.id} className="bg-gray-700 p-4 rounded mb-2 border border-gray-700 hover:border-gray-100">
-                <p>{log.message}</p><br/>
-                <p>{log.timestamp}</p>
+              <li key={log.id} className="flex flex-col gap-1 bg-gray-700 p-4 rounded mb-2 border border-gray-700 hover:border-gray-100">
+                <p>{log.message}</p>
+                <p className="text-sm text-gray-300">{log.timestamp}</p>
               </li>
             ))}
           </ul>

@@ -35,7 +35,6 @@ export const useStockStore = create<StockStore>((set, get) => {
         body: JSON.stringify({ id, quantity, log }),
       });
       const data = await res.json();
-      console.log(data);
       } catch (err) {
       console.error("Error updating stock:", err);
       }

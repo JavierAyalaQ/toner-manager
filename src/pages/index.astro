@@ -11,16 +11,21 @@ import GeneralPanel from "@sections/GeneralPanel.tsx";
 		<Typography as="h1" variant="h1" color="primary">Manejo de Inventario de Toner</Typography>
 		<div class="flex flex-col gap-4">
       <GeneralPanel client:load />
-      <div class="w-full rounded border border-gray-700 hover:border-gray-100 p-8 bg-gray-700/50 prose-base">
+      <div class="w-full text-sm md:text-base rounded border border-gray-700 hover:border-gray-100 p-8 bg-gray-700/50 prose-base">
         <h4 class="text-xl font-semibold">Descripción:</h4>
-          <p class="text-base">Manejo del inventario de Toner para todas las impresoras de la sede principal de ECOIMAGEN SALUD S.A.S.</p>
+          <p>Manejo del inventario de Toner para todas las impresoras de la sede principal de ECOIMAGEN SALUD S.A.S.</p>
         <h4 class="text-xl font-semibold">Instrucciones:</h4>
-        <p class="text-base">Dirígase a la página de manejo, desde esta puede añadir o quitar al stock de cada uno de los tipos de Toner. Para esto seleccione la opcion del tipo de Toner, digite la cantidad y de clic en Agregar o Quitar según sea el caso.</p>
-        <p class="text-base">Desde el historial puede ver los cambios desde el más reciente al más viejo.</p>
+          <p>Dirígase a la página de manejo, desde esta puede añadir o quitar al stock de cada uno de los tipos de Toner. Para esto seleccione la opcion del tipo de Toner, digite la cantidad y de clic en Agregar o Quitar según sea el caso.</p>
+          <p>Desde el historial puede ver los cambios desde el más reciente al más viejo.</p>
         <h4 class="text-xl font-semibold">Pendiente:</h4>
-        <p class="text-base">Añadir Socket IO u otra forma de persistir cambios entre 2 o más usuarios.</p>
-        <p class="text-base">Añadir autenticación básica.</p>
-        <p class="text-base">Mejorar diseño general y optimizar versión móvil.</p>
+          <p>Añadir Socket IO u otra forma de persistir cambios entre 2 o más usuarios.</p>
+          <p>Mostrar correctamente los logs en el historial. ¿Añadir paginación?</p>
+          <p>Convertir el formato de las fechas.</p>
+          <p>Añadir actualización de logs mediante useState.</p>
+          <p>Eliminar componentes innecesarios, refactorizar, crear barrels, etc.</p>
+          <p>Limpiar base de datos.</p>
+          <p class="line-through">Añadir autenticación básica.</p>
+          <p class="line line-through">Mejorar diseño general y optimizar versión móvil.</p>
       </div>
     </div>
   </Container>

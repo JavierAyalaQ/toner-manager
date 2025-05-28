@@ -7,7 +7,6 @@ import { db } from "@/lib/neon";
 
 const logs = await db`SELECT * FROM toner_logs ORDER BY toner_log_id DESC`;
 
-const page = Astro.params.page;
 ---
 
 <Layout title="Historial">
