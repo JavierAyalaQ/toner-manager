@@ -81,17 +81,22 @@ export default function StockControls() {
       <div className="gap-4 col-span-2 row-span-2 col-start-1 row-start-1 md:gap-0 w-full h-full bg-gray-700/50 border border-gray-700 hover:border-gray-100 rounded p-4">
         <h2 className="text-2xl font-bold mb-2">Gestionar</h2>
         <form id="stock-form" className="flex flex-col gap-4 items-center justify-center">
-          <select
-            className="border rounded p-2 w-full"
-            value={selectedTonerId}
-            onChange={(e) => setSelectedTonerId(parseInt(e.target.value))}
-            >
-            {Object.entries(stock).map(([_, item]) => (
-              <option key={item.id} value={item.id} className="flex items-center bg-gray-100 p-2 rounded mb-2 text-gray-700" onChange={(e) => setSelectedTonerId(item.id)}>
-                {item.name}
-              </option>
-            ))}
-          </select>
+          <div className="relative w-full h-full">
+            <select
+              className="border rounded p-2 w-full appearance-none cursor-pointer"
+              value={selectedTonerId}
+              onChange={(e) => setSelectedTonerId(parseInt(e.target.value))}
+              >
+              {Object.entries(stock).map(([_, item]) => (
+                <option key={item.id} value={item.id} className="appearance-none flex items-center bg-gray-200 p-2 rounded mb-2 text-gray-800 border border-teal-500" onChange={(e) => setSelectedTonerId(item.id)}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-100">
+              <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
           <input
             type="number"
             id="stock"

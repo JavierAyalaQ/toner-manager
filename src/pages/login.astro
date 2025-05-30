@@ -1,27 +1,28 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Container from "@components/Container.astro";
 
 const error = Astro.url.searchParams.get("error");
 ---
 
 <Layout title="Login">
-  <div class="flex flex-col items-center justify-center px-8">
-    <h1 class="text-4xl font-bold mb-4">Login</h1>
+  <Container className="flex flex-col items-center justify-start min-h-screen">
+    <h1 class="text-4xl font-bold mb-8">Inicio de sesión</h1>
     <form class="w-full max-w-sm" method="post" action="/api/login">
       <div class="mb-4">
         <label
-          class="block text-gray-100 text-sm font-bold mb-2"
+          class="block text-gray-100 text-lg font-bold mb-4"
           for="password"
         >
-          Password
+          Contraseña de administrador
         </label>
         <input
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-100 mb-3 leading-tight focus:outline-none ring-teal-500/50 focus:ring-4"
           id="password"
           type="password"
           name="password"
           required
-          placeholder="Password"
+          placeholder="Contraseña..."
         />
       </div>
       <div class="flex flex-col items-center justify-center">
@@ -40,5 +41,5 @@ const error = Astro.url.searchParams.get("error");
         }
       </div>
     </form>
-  </div>
+  </Container>
 </Layout>
