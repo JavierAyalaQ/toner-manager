@@ -1,0 +1,19 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { db } from "@/lib/neon";
+
+const stock = await db`SELECT * FROM toner_stock`;
+---
+
+<Layout title="Todos los Toner">
+  <h1 class="text-center w-full text-2xl font-bold">Todos los Toner</h1>
+  <ul class="list-disc flex flex-col gap-4 items-center text-center w-full ">
+    {
+      stock.map((page) => (
+        <li>
+          <a href={`/toner/${page.toner_name}`}>{page.toner_name}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Layout>

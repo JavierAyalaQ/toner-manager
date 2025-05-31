@@ -1,0 +1,41 @@
+---
+import Container from "@/components/Container.astro";
+import Layout from "@/layouts/Layout.astro";
+import { db } from "@/lib/neon";
+
+const { name } = Astro.params;
+
+const stock = await db`SELECT * FROM toner_stock;`;
+const found = stock.find((o) => o.toner_name === name);
+const id = found?.toner_id;
+const logs = await db`SELECT * FROM toner_logs WHERE toner_id = ${id};`;
+
+const {
+  toner_id: item_id,
+  toner_name: item_name,
+  toner_amount: quantity,
+} = found || {};
+console.log(found);
+---
+
+<Layout title={`${name}`}>
+  <Container>
+    <h1>{item_name}</h1>
+    <p>Cantidad: {quantity}</p>
+    {
+      logs.length === 0 ? (
+        <p>No logs found.</p>
+      ) : (
+        logs.map(({ log_id, log_message, log_timestamp }) => (
+          <div>
+            <h1>{item_name}</h1>
+            <p>Cantidad: {quantity}</p>
+            <p>Log ID: {log_id}</p>
+            <p>Log message: {log_message}</p>
+            <p>Log timestamp: {log_timestamp}</p>
+          </div>
+        ))
+      )
+    }
+  </Container>
+</Layout>
